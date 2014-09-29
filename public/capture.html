@@ -5,5 +5,19 @@
 </head>
 <body>
 <h1>Capture Page !</h1>
+
+<script src="/bower_components/socket.io-client/socket.io.js"></script>
+<script src="/bower_components/modernizer/modernizr.js"></script>
+<script>
+    var socket = io('localhost:3000/capture');
+    socket.on('connect', function(){
+        var data = {
+            url: window.location.href,
+            touch: Modernizr.touch,
+            video: Modernizr.video
+        };
+        socket.emit('client-data', data);
+    });
+</script>
 </body>
 </html>
