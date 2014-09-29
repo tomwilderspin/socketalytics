@@ -25,3 +25,4 @@ build/Release
 # For the purposes of the tutorial we are going to check in our dependencies
 #node_modules
 #public/bower_components
+.idea
