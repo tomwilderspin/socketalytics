@@ -34,13 +34,13 @@ capture.on('connection', function(socket){
         var pageCount = stats.pages[ data.url ] || 0;
         stats.pages[ data.url ] = ++pageCount;
     });
-});
-socket.on('disconnect', function(){
-    --stats.connections;
-    stats.touch -= ( socketData[ socket.id ].touch? 1:0 );
-    stats.video -= ( socketData[ socket.id ].video? 1:0 );
-    --stats.pages[ socketData[ sokcet.id ].url ];
-    delete socketData[ socket.id ];
+    socket.on('disconnect', function(){
+        --stats.connections;
+        stats.touch -= ( socketData[ socket.id ].touch? 1:0 );
+        stats.video -= ( socketData[ socket.id ].video? 1:0 );
+        --stats.pages[ socketData[ socket.id ].url ];
+        delete socketData[ socket.id ];
+    });
 });
 
 var stats = { connections:0, touch:0, video:0, pages:{} };
