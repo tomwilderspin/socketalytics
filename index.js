@@ -41,5 +41,12 @@ socket.on('disconnect', function(){
     stats.video -= ( socketData[ socket.id ].video? 1:0 );
     --stats.pages[ socketData[ sokcet.id ].url ];
     delete socketData[ socket.id ];
-})
+});
+
+var stats = { connections:0, touch:0, video:0, pages:{} };
+var dashboard = io.of('/dashboard');
+dashboard.on('connection', function(socket){
+    socket.emit('stats-updated', stats);
+});
+
 
